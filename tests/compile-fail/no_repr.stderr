@@ -1,0 +1,11 @@
+error: Repr not found
+ --> $DIR/no_repr.rs:4:19
+  |
+4 | #[derive(TryFrom, Into, Copy, Clone, Debug, PartialEq)]
+  |                   ^^^^
+
+error: Repr not found
+ --> $DIR/no_repr.rs:4:10
+  |
+4 | #[derive(TryFrom, Into, Copy, Clone, Debug, PartialEq)]
+  |          ^^^^^^^

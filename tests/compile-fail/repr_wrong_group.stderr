@@ -1,0 +1,11 @@
+error: Repr is malformed, expecting repr(TYPE)
+ --> $DIR/repr_wrong_group.rs:4:7
+  |
+4 | #[repr[i8]]
+  |       ^^^^
+
+error: expected one of `(` or `=`, found `[`
+ --> $DIR/repr_wrong_group.rs:4:7
+  |
+4 | #[repr[i8]]
+  |       ^ expected one of `(` or `=` here

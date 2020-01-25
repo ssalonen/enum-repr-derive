@@ -1,0 +1,27 @@
+error: Many repr types specified. Expecting only one.
+ --> $DIR/two_repr_types.rs:4:10
+  |
+4 | #[repr(i8, u8)]
+  |          ^
+
+warning[E0566]: conflicting representation hints
+ --> $DIR/two_repr_types.rs:4:8
+  |
+4 | #[repr(i8, u8)]
+  |        ^^  ^^
+
+error[E0600]: cannot apply unary operator `-` to type `u8`
+ --> $DIR/two_repr_types.rs:7:12
+  |
+7 |     VAR1 = -1,
+  |            ^^ cannot apply unary operator `-`
+  |
+  = note: unsigned values cannot be negated
+
+error[E0600]: cannot apply unary operator `-` to type `u8`
+ --> $DIR/two_repr_types.rs:8:12
+  |
+8 |     VAR2 = -3,
+  |            ^^ cannot apply unary operator `-`
+  |
+  = note: unsigned values cannot be negated
