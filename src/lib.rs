@@ -1,4 +1,4 @@
-//! # enum-primitive-conversion
+//! # enum-repr-derive
 //!
 //! [![Build Status](https://www.travis-ci.org/ssalonen/enum-repr-derive.svg?branch=master)](https://www.travis-ci.org/ssalonen/enum-repr-derive)
 //! [![Crate](https://img.shields.io/crates/v/enum-repr-derive.svg)](https://crates.io/enum-repr-derive)
