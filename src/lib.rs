@@ -60,7 +60,7 @@ pub fn derive_try_from(input: proc_macro::TokenStream) -> proc_macro::TokenStrea
         impl core::convert::TryFrom<#reprtype> for #enum_name  {
             type Error = #reprtype;
 
-            fn try_from(val : #reprtype) -> Result<Self, Self::Error> {
+            fn try_from(val : #reprtype) -> Result<Self, <Self as core::convert::TryFrom<#reprtype>>::Error> {
                 #match_expr
             }
         }
