@@ -1,40 +1,37 @@
 # enum-repr-derive
 
-[![Build Status](https://www.travis-ci.org/ssalonen/enum-repr-derive.svg?branch=master)](https://www.travis-ci.org/ssalonen/enum-repr-derive)
-[![Crate](https://img.shields.io/crates/v/enum-repr-derive.svg)](https://crates.io/enum-repr-derive)
-[![Documentation](https://docs.rs/enum-repr-derive/badge.svg)](https://docs.rs/enum-repr-derive)
+[![Crates.io](https://img.shields.io/crates/v/enum-repr-derive.svg)](https://crates.io/crates/enum-repr-derive)
+[![Docs.rs](https://docs.rs/enum-repr-derive/badge.svg)](https://docs.rs/enum-repr-derive)
+[![CI](https://github.com/ssalonen/enum-repr-derive/workflows/Continuous%20Integration/badge.svg)](https://github.com/ssalonen/enum-repr-derive/actions)
+[![Coverage Status](https://coveralls.io/repos/github/ssalonen/enum-repr-derive/badge.svg?branch=master)](https://coveralls.io/github/ssalonen/enum-repr-derive?branch=master)
 
-Procedural derive macro for converting fieldless enums to (`Into`) and from (`TryFrom`) its repr type.
+## Installation
 
-See the [Nomicon section on `repr`](https://doc.rust-lang.org/nomicon/other-reprs.html#repru-repri) for more details on fieldless enums.
+### Cargo
 
-## Example code
-
-By using this library the following code just works:
-
-```rust
-#[macro_use]
-extern crate enum_repr_derive;
-use enum_repr_derive::{Into, TryFrom};
-use std::convert::TryFrom;
-
-#[repr(i8)]
-#[derive(TryFrom, Into, Copy, Clone, Debug, PartialEq)]
-enum Foo {
-    VAR1 = -1,
-    VAR2 = -3,
-}
-assert_eq!(Foo::try_from(-1), Ok(Foo::VAR1));
-assert_eq!(Foo::try_from(-3), Ok(Foo::VAR2));
-assert_eq!(Foo::try_from(-9), Err(-9));
-assert_eq!(Into::<i8>::into(Foo::VAR1), -1);
-assert_eq!(Into::<i8>::into(Foo::VAR2), -3);
-```
+* Install the rust toolchain in order to have cargo installed by following
+  [this](https://www.rust-lang.org/tools/install) guide.
+* run `cargo install enum-repr-derive`
 
 ## License
 
-Licensed under MIT. See `LICENSE` file.
+Licensed under either of
 
-## For developers
+ * Apache License, Version 2.0
+   ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
+ * MIT license
+   ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
 
-Release: `cargo release`
+at your option.
+
+## Contribution
+
+Unless you explicitly state otherwise, any contribution intentionally submitted
+for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
+dual licensed as above, without any additional terms or conditions.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Releasing
+
+```cargo release --skip-publish``` and let the github CD pipeline do the rest.
