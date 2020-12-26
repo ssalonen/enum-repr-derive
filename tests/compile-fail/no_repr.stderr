@@ -3,9 +3,13 @@ error: Repr not found
   |
 4 | #[derive(TryFrom, Into, Copy, Clone, Debug, PartialEq)]
   |                   ^^^^
+  |
+  = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error: Repr not found
  --> $DIR/no_repr.rs:4:10
   |
 4 | #[derive(TryFrom, Into, Copy, Clone, Debug, PartialEq)]
   |          ^^^^^^^
+  |
+  = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
