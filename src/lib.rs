@@ -45,7 +45,7 @@ use proc_macro_error::{abort, abort_call_site, proc_macro_error};
 use quote::quote;
 use syn::{parse_macro_input, AttrStyle, Attribute, Data, DeriveInput, Expr, Ident};
 
-#[proc_macro_derive(TryFrom)]
+#[proc_macro_derive(TryFromReprToEnum)]
 #[proc_macro_error]
 pub fn derive_try_from(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
@@ -67,18 +67,20 @@ pub fn derive_try_from(input: proc_macro::TokenStream) -> proc_macro::TokenStrea
     })
 }
 
-#[proc_macro_derive(Into)]
+#[proc_macro_derive(FromEnumToRepr)]
 #[proc_macro_error]
-pub fn derive_into(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
+pub fn derive_into_primitive_and_from_enum(
+    input: proc_macro::TokenStream,
+) -> proc_macro::TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let reprtype = find_repr_type(input.attrs);
     let enum_name = input.ident;
 
     proc_macro::TokenStream::from(quote! {
 
-        impl core::convert::Into<#reprtype> for #enum_name  {
-               fn into(self : #enum_name) -> #reprtype {
-                self as #reprtype
+        impl core::convert::From<#enum_name> for #reprtype  {
+               fn from(enum_value : #enum_name) -> Self {
+                enum_value as Self
             }
         }
     })
