@@ -14,11 +14,11 @@
 //!
 //! ```rust
 //! extern crate enum_repr_derive;
-//! use enum_repr_derive::{Into, TryFrom};
+//! use enum_repr_derive::{FromEnumToRepr, TryFromReprToEnum};
 //! use std::convert::TryFrom;
 //!
 //! #[repr(i8)]
-//! #[derive(TryFrom, Into, Copy, Clone, Debug, PartialEq)]
+//! #[derive(TryFromReprToEnum, FromEnumToRepr, Copy, Clone, Debug, PartialEq)]
 //! enum Foo {
 //!     VAR1 = -1,
 //!     VAR2 = -3,
@@ -28,6 +28,8 @@
 //! assert_eq!(Foo::try_from(-9), Err(-9));
 //! assert_eq!(Into::<i8>::into(Foo::VAR1), -1);
 //! assert_eq!(Into::<i8>::into(Foo::VAR2), -3);
+//! assert_eq!(i8::from(Foo::VAR1), -1);
+//! assert_eq!(i8::from(Foo::VAR2), -3);
 //! ```
 //!
 //! ## License
