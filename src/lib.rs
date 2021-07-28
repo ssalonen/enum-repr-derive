@@ -14,11 +14,11 @@
 //!
 //! ```rust
 //! extern crate enum_repr_derive;
-//! use enum_repr_derive::{Into, TryFrom};
+//! use enum_repr_derive::{FromEnumToRepr, TryFromReprToEnum};
 //! use std::convert::TryFrom;
 //!
 //! #[repr(i8)]
-//! #[derive(TryFrom, Into, Copy, Clone, Debug, PartialEq)]
+//! #[derive(TryFromReprToEnum, FromEnumToRepr, Copy, Clone, Debug, PartialEq)]
 //! enum Foo {
 //!     VAR1 = -1,
 //!     VAR2 = -3,
@@ -28,6 +28,8 @@
 //! assert_eq!(Foo::try_from(-9), Err(-9));
 //! assert_eq!(Into::<i8>::into(Foo::VAR1), -1);
 //! assert_eq!(Into::<i8>::into(Foo::VAR2), -3);
+//! assert_eq!(i8::from(Foo::VAR1), -1);
+//! assert_eq!(i8::from(Foo::VAR2), -3);
 //! ```
 //!
 //! ## License
@@ -45,7 +47,7 @@ use proc_macro_error::{abort, abort_call_site, proc_macro_error};
 use quote::quote;
 use syn::{parse_macro_input, AttrStyle, Attribute, Data, DeriveInput, Expr, Ident};
 
-#[proc_macro_derive(TryFrom)]
+#[proc_macro_derive(TryFromReprToEnum)]
 #[proc_macro_error]
 pub fn derive_try_from(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
@@ -67,18 +69,20 @@ pub fn derive_try_from(input: proc_macro::TokenStream) -> proc_macro::TokenStrea
     })
 }
 
-#[proc_macro_derive(Into)]
+#[proc_macro_derive(FromEnumToRepr)]
 #[proc_macro_error]
-pub fn derive_into(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
+pub fn derive_into_primitive_and_from_enum(
+    input: proc_macro::TokenStream,
+) -> proc_macro::TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let reprtype = find_repr_type(input.attrs);
     let enum_name = input.ident;
 
     proc_macro::TokenStream::from(quote! {
 
-        impl core::convert::Into<#reprtype> for #enum_name  {
-               fn into(self : #enum_name) -> #reprtype {
-                self as #reprtype
+        impl core::convert::From<#enum_name> for #reprtype  {
+               fn from(enum_value : #enum_name) -> Self {
+                enum_value as Self
             }
         }
     })

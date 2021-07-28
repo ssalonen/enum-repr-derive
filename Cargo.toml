@@ -1,23 +1,14 @@
 [package]
 name = 'enum-repr-derive'
-version = "0.1.6-alpha.0"
+version = "0.2.0-alpha.0"
 authors = ['Sami Salonen']
 edition = '2018'
 license = 'MIT'
 description = 'Simple trait for converting enum to and from its primitive repr type'
 documentation = 'https://docs.rs/enum-repr-derive'
 readme = 'README.md'
-include = [
-    '/README.md',
-    '/LICENSE',
-    '/Cargo.toml',
-    '/src/*.rs',
-]
-keywords = [
-    'enum',
-    'conversion',
-    'primitive',
-]
+include = ['/README.md', '/LICENSE', '/Cargo.toml', '/src/*.rs']
+keywords = ['enum', 'conversion', 'primitive']
 categories = ['no-std']
 homepage = 'https://github.com/ssalonen/enum-repr-derive'
 repository = 'https://github.com/ssalonen/enum-repr-derive'
